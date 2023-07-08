@@ -1,23 +1,6 @@
 import React from "react";
 
 export default function List({ todoData, setTodoData }) {
-  const btnStyle = {
-    color: "#FFF",
-    border: "none",
-    padding: "5px 9px",
-    borderRadius: "50%",
-    cursor: "pointer",
-    float: "right",
-  };
-
-  const getStyle = (completed) => {
-    return {
-      padding: "10px",
-      borderBottom: "1px #ccc dotted",
-      textDecoration: completed ? "line-through" : "none",
-    };
-  };
-
   const handleClick = (id) => {
     let newTodoData = todoData.filter((todo) => todo.id !== id);
     setTodoData(newTodoData);
@@ -36,23 +19,30 @@ export default function List({ todoData, setTodoData }) {
   return (
     <div>
       {todoData.map((todo) => (
-        <div key={todo.id} style={getStyle(todo.completed)}>
-          <input
-            type="checkbox"
-            defaultChecked={todo.completed}
-            onChange={() => {
-              handleCompleteChange(todo.id);
-            }}
-          />
-          {todo.title}
-          <button
-            style={btnStyle}
-            onClick={() => {
-              handleClick(todo.id);
-            }}
-          >
-            x
-          </button>
+        <div key={todo.id}>
+          <div className="flex justify-between items-center px-4 py-1 my-2 text-gray-600 bg-gray-100 border rounded">
+            <div>
+              <input
+                type="checkbox"
+                defaultChecked={todo.completed}
+                onChange={() => {
+                  handleCompleteChange(todo.id);
+                }}
+              />
+            </div>
+            <span className={todo.completed ? "line-through" : undefined}>
+              {todo.title}
+            </span>
+            <div className="items-center">
+              <button
+                onClick={() => {
+                  handleClick(todo.id);
+                }}
+              >
+                x
+              </button>
+            </div>
+          </div>
         </div>
       ))}
     </div>
