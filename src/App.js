@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import "./App.css";
-import Lists from "./components/Lists";
 import Form from "./components/Form";
+import Lists from "./components/Lists";
 
 export default function App() {
   const [todoData, setTodoData] = useState([]);
